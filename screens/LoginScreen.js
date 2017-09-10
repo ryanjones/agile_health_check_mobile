@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  TextInput,
   View,
-  Button,
   StyleSheet,
   Alert
 } from 'react-native';
+
+import { FormLabel, FormInput, Button } from 'react-native-elements'
 
 
 export default class LoginScreen extends React.Component {
@@ -36,11 +36,17 @@ export default class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.outerContainer}>
-        <TextInput
-          placeholder="email"
+        <FormLabel
+          style={styles.formLabel}>
+          Email
+        </FormLabel>
+
+
+        <FormInput
+          placeholder="Please enter your email..."
           blurOnSubmit={ false }
           returnKeyType={ "next" }
-          style={styles.textInput}
+          style={styles.formInput}
           ref={ input => {
             this.inputs['one'] = input;
           }}
@@ -49,19 +55,28 @@ export default class LoginScreen extends React.Component {
           }}
           onChangeText={email => this.setState({email})}
         />
-        <TextInput
-          placeholder="password"
+        <FormLabel
+          style={styles.formLabel}>
+          Password
+        </FormLabel>
+        <FormInput
+          placeholder="Please enter your password..."
           blurOnSubmit={ false }
           returnKeyType={ "go" }
-          style={styles.textInput}
+          style={styles.formInput}
           ref={ input => {
             this.inputs['two'] = input;
           }}
           onChangeText={password => this.setState({password})}
           onSubmitEditing={() => { this.submitForm() }}
         />
+        
         <Button
           title="Login"
+          icon={{name: 'done'}}
+          iconRight
+          raised
+          style={styles.formButton}
           onPress={this.submitForm}
         />
 
@@ -71,21 +86,16 @@ export default class LoginScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  outerContainer: {
-    flex: 1,
-    paddingTop: 60,
-    alignItems: 'center',
-    flexDirection: 'column',
+  formInput: {
+    paddingBottom: 5
   },
-  textInput: {
-    alignSelf: 'stretch',
-    borderRadius: 5,
-    borderWidth: 1,
-    height: 44,
-    paddingHorizontal: 10,
-    marginHorizontal: 20,
-    marginBottom: 20,
+  formLabel: {
+    paddingTop: 20,
+    paddingBottom: 10
   },
+  formButton: {
+    paddingTop: 40
+  }
 }
   
 );
